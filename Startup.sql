@@ -27,3 +27,26 @@
 --     name VARCHAR(255) NOT NULL,
 --     PRIMARY KEY (id)
 -- )
+
+-- CREATE TABLE bookauthors (
+--     id INT NOT NULL AUTO_INCREMENT,
+--     authorId INT NOT NULL,
+--     bookId INT NOT NULL,
+--     PRIMARY KEY (id),
+
+--     FOREIGN KEY (authorId)
+--         REFERENCES authors(id)
+--         ON DELETE CASCADE,
+
+--     FOREIGN KEY (bookId)
+--         REFERENCES books(id)
+--         ON DELETE CASCADE
+-- )
+
+
+
+
+-- --NOTE Getting shoes by cart i
+SELECT s.* FROM bookauthors ba
+INNER JOIN books s ON s.id = ba.bookId
+WHERE authorId = 1;

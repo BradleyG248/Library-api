@@ -8,20 +8,17 @@ namespace library_api.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  public class AuthorsController : ControllerBase
+  public class BookAuthorsController : ControllerBase
   {
-    private readonly AuthorsService _bs;
-    private readonly BookAuthorsService _bas;
+    private readonly BookAuthorsService _bs;
     // NOTE Dependency Injection
-    public AuthorsController(AuthorsService bs, BookAuthorsService bas)
+    public BookAuthorsController(BookAuthorsService bs)
     {
       _bs = bs;
-      _bas = bas;
     }
 
-
     [HttpGet]
-    public ActionResult<IEnumerable<Author>> Get()
+    public ActionResult<IEnumerable<BookAuthor>> Get()
     {
       try
       {
@@ -33,7 +30,7 @@ namespace library_api.Controllers
       }
     }
     [HttpGet("{id}")]
-    public ActionResult<Author> Get(int id)
+    public ActionResult<BookAuthor> Get(int id)
     {
       try
       {
@@ -44,25 +41,13 @@ namespace library_api.Controllers
         return BadRequest(e.Message);
       }
     }
-    [HttpGet("{id}/books")]
-    public ActionResult<Author> GetBooks(int id)
-    {
-      try
-      {
-        return Ok(_bas.GetBooksByAuthorId(id));
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
     [HttpPut("{bookId}")]
-    public ActionResult<Author> Edit(int bookId, [FromBody] Author updatedAuthor)
+    public ActionResult<BookAuthor> Edit(int bookId, [FromBody] BookAuthor updatedBookAuthor)
     {
       try
       {
-        updatedAuthor.Id = bookId;
-        return Ok(_bs.Edit(updatedAuthor));
+        updatedBookAuthor.Id = bookId;
+        return Ok(_bs.Edit(updatedBookAuthor));
       }
       catch (Exception e)
       {
@@ -70,11 +55,11 @@ namespace library_api.Controllers
       }
     }
     [HttpPost]
-    public ActionResult<Author> Create([FromBody] Author newAuthor)
+    public ActionResult<BookAuthor> Create([FromBody] BookAuthor newBookAuthor)
     {
       try
       {
-        return Ok(_bs.Create(newAuthor));
+        return Ok(_bs.Create(newBookAuthor));
       }
       catch (Exception e)
       {
@@ -82,7 +67,7 @@ namespace library_api.Controllers
       }
     }
     [HttpDelete("{bookId}")]
-    public ActionResult<Author> Delete(int bookId)
+    public ActionResult<BookAuthor> Delete(int bookId)
     {
       try
       {

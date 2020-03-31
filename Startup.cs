@@ -38,6 +38,10 @@ namespace library_api
       services.AddTransient<BooksRepository>();
       services.AddTransient<LibrariesService>();
       services.AddTransient<LibrariesRepository>();
+      services.AddTransient<BookAuthorsService>();
+      services.AddTransient<BookAuthorsRepository>();
+      services.AddTransient<AuthorsService>();
+      services.AddTransient<AuthorsRepository>();
 
     }
 
